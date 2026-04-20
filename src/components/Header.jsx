@@ -64,20 +64,22 @@ export default function Header() {
             <a
               href="/Curriculo-Bryan-Junqueira.pdf"
               download="Bryan_Junqueira_CV.pdf"
-              className="group hidden md:inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium rounded-full border border-white/15 text-white/90 hover:bg-white hover:text-[#0a0a0a] transition-all duration-300"
+              className="group hidden md:inline-flex items-center justify-center gap-3 text-sm font-medium rounded-lg border border-white/80 bg-transparent text-white hover:bg-white/10 transition-all duration-200"
+              style={{ letterSpacing: 'normal', padding: '12px 28px' }}
             >
-              <FiDownload size={14} className="group-hover:animate-bounce" />
-              Baixar CV
+              <span style={{ lineHeight: '1' }}>Resume</span>
+              <FiDownload size={16} className="group-hover:translate-y-[3px] transition-transform duration-200" style={{ marginTop: '1px' }} />
             </a>
 
             {/* Mobile: CV compacto + hamburger */}
             <a
               href="/Curriculo-Bryan-Junqueira.pdf"
               download="Bryan_Junqueira_CV.pdf"
-              className="md:hidden inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-full border border-white/15 text-white/90"
+              className="md:hidden inline-flex items-center justify-center gap-2 text-sm font-medium rounded-lg border border-white/80 bg-transparent text-white"
+              style={{ letterSpacing: 'normal', padding: '10px 20px' }}
             >
-              <FiDownload size={12} />
-              CV
+              <span style={{ lineHeight: '1' }}>Resume</span>
+              <FiDownload size={14} style={{ marginTop: '1px' }} />
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
