@@ -19,7 +19,7 @@ export default function App() {
             <Hero />
           </div>
           {/* Conteúdo que sobe, com z-10 para cobrir o Hero */}
-          <div className="relative z-10 bg-[#0a0a0a] rounded-t-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.8)] pt-4 border-t border-white/5">
+          <div className="content-panel relative z-10 bg-[#0a0a0a] rounded-t-[3rem] pt-4">
             <About />
             <Projects />
             <Skills />
