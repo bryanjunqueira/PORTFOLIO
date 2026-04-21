@@ -37,7 +37,7 @@ export default function Header() {
             <a
               href="#home"
               onClick={(e) => handleClick(e, '#home')}
-              className="text-lg font-semibold tracking-wide text-white hover:text-text-secondary transition-colors"
+              className="inline-block text-lg font-semibold tracking-wide text-white hover:text-text-secondary hover:scale-110 hover:-translate-y-2 transition-all duration-300"
             >
               Bryan Junqueira
             </a>
@@ -51,7 +51,7 @@ export default function Header() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleClick(e, link.href)}
-                  className="text-sm font-medium text-text-muted hover:text-white transition-colors duration-300"
+                  className="inline-block text-sm font-medium text-text-muted hover:text-white hover:scale-125 hover:-translate-y-2 transition-all duration-300"
                 >
                   {link.name}
                 </a>
@@ -64,7 +64,7 @@ export default function Header() {
             <a
               href="/Curriculo-Bryan-Junqueira.pdf"
               download="Bryan_Junqueira_CV.pdf"
-              className="group hidden md:inline-flex items-center justify-center gap-3 text-sm font-medium rounded-lg border border-white/80 bg-transparent text-white hover:bg-white/10 transition-all duration-200"
+              className="group hidden md:inline-flex items-center justify-center gap-3 text-sm font-medium rounded-lg border border-white/80 bg-transparent text-white hover:bg-white/10 hover:scale-110 hover:-translate-y-2 transition-all duration-300"
               style={{ letterSpacing: 'normal', padding: '12px 28px' }}
             >
               <span style={{ lineHeight: '1' }}>Resume</span>

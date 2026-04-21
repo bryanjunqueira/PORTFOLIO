@@ -28,25 +28,29 @@ export default function ParticlesBackground() {
     particles: {
       color: { value: "#ffffff" },
       links: {
-        enable: false, // Remoção das linhas para visual mais clean de dots
+        enable: true, // Sistema panorâmico conectado
+        color: "#ffffff",
+        distance: 150,
+        opacity: 0.1,
+        width: 1,
       },
       move: {
-        direction: "top", // Movimento suave subindo
+        direction: "none", // Movimento em todas as direções (panorâmico)
         enable: true,
-        outModes: { default: "out" },
+        outModes: { default: "bounce" },
         random: true,
-        speed: { min: 0.1, max: 0.4 },
-        straight: true,
+        speed: { min: 0.2, max: 0.8 },
+        straight: false,
       },
       number: {
         density: { enable: true, area: 1000 },
-        value: 50, // Menos partículas
+        value: 100, // Mais partículas rodando
       },
       opacity: {
-        value: { min: 0.05, max: 0.2 },
+        value: { min: 0.1, max: 0.3 },
       },
       shape: { type: "circle" },
-      size: { value: { min: 1, max: 2 } },
+      size: { value: { min: 1, max: 3 } },
     },
     detectRetina: true,
   };

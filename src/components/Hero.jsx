@@ -5,11 +5,32 @@ export default function Hero() {
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20">
       <div className="max-w-5xl mx-auto px-6 lg:px-12 w-full text-center flex flex-col items-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-6"
+          initial={{ 
+            opacity: 0, 
+            y: 20,
+            filter: "drop-shadow(0px 0px 0px rgba(255, 255, 255, 0))"
+          }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            filter: "drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.2))"
+          }}
+          whileHover={{ 
+            scale: 1.08,
+            filter: "drop-shadow(0px 0px 45px rgba(255, 255, 255, 0.8))"
+          }}
+          transition={{ 
+            duration: 0.8, 
+            ease: "easeOut",
+            scale: { duration: 0.3, ease: "easeOut" },
+            filter: { duration: 0.3, ease: "easeOut" }
+          }}
+          className="space-y-6 cursor-default"
         >
+          <p className="text-sm sm:text-base font-semibold tracking-wider uppercase text-text-muted mb-2 sm:mb-4 inline-block transition-colors duration-300 hover:text-white">
+            Olá, meu nome é Bryan
+          </p>
+
           <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-white leading-tight">
             Desenvolvedor <br className="hidden sm:block" />
             <span className="text-text-secondary font-medium">Front-End</span>
