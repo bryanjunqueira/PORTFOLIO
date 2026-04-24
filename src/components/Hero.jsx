@@ -1,49 +1,114 @@
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { FiDownload, FiMail } from 'react-icons/fi';
+
+const TYPING_TEXT = 'Desenvolvedor Full-Stack';
+const TYPING_SPEED = 90;
+const DELETING_SPEED = 50;
+const PAUSE_AFTER_TYPING = 2000;
+const PAUSE_AFTER_DELETING = 800;
 
 export default function Hero() {
-  return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20">
-      <div className="max-w-5xl mx-auto px-6 lg:px-12 w-full text-center flex flex-col items-center">
-        <motion.div
-          initial={{ 
-            opacity: 0, 
-            y: 20,
-            filter: "drop-shadow(0px 0px 0px rgba(255, 255, 255, 0))"
-          }}
-          animate={{ 
-            opacity: 1, 
-            y: 0,
-            filter: "drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.2))"
-          }}
-          whileHover={{ 
-            scale: 1.08,
-            filter: "drop-shadow(0px 0px 45px rgba(255, 255, 255, 0.8))"
-          }}
-          transition={{ 
-            duration: 0.8, 
-            ease: "easeOut",
-            scale: { duration: 0.3, ease: "easeOut" },
-            filter: { duration: 0.3, ease: "easeOut" }
-          }}
-          className="space-y-6 cursor-default"
-        >
-          <p className="text-sm sm:text-base font-semibold tracking-wider uppercase text-text-muted mb-2 sm:mb-4 inline-block transition-colors duration-300 hover:text-white">
-            Olá, meu nome é Bryan
-          </p>
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const indexRef = useRef(0);
+  const timeoutRef = useRef(null);
 
-          <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-white leading-tight">
-            Desenvolvedor <br className="hidden sm:block" />
-            <span className="text-text-secondary font-medium">Front-End</span>
+  useEffect(() => {
+    const tick = () => {
+      if (!isDeleting) {
+        // Typing
+        if (indexRef.current < TYPING_TEXT.length) {
+          indexRef.current += 1;
+          setDisplayText(TYPING_TEXT.slice(0, indexRef.current));
+          timeoutRef.current = setTimeout(tick, TYPING_SPEED);
+        } else {
+          // Finished typing — pause, then start deleting
+          timeoutRef.current = setTimeout(() => {
+            setIsDeleting(true);
+          }, PAUSE_AFTER_TYPING);
+        }
+      } else {
+        // Deleting
+        if (indexRef.current > 0) {
+          indexRef.current -= 1;
+          setDisplayText(TYPING_TEXT.slice(0, indexRef.current));
+          timeoutRef.current = setTimeout(tick, DELETING_SPEED);
+        } else {
+          // Finished deleting — pause, then start typing
+          timeoutRef.current = setTimeout(() => {
+            setIsDeleting(false);
+          }, PAUSE_AFTER_DELETING);
+        }
+      }
+    };
+
+    timeoutRef.current = setTimeout(tick, isDeleting ? DELETING_SPEED : TYPING_SPEED);
+    return () => clearTimeout(timeoutRef.current);
+  }, [isDeleting]);
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    const el = document.querySelector('#contato');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section id="home" className="hero-section">
+      <div className="hero-content">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          className="hero-text-block"
+        >
+          {/* Big Name */}
+          <h1 className="hero-name">
+            Bryan Junqueira
           </h1>
 
-          <p className="text-lg sm:text-xl text-text-muted max-w-2xl font-light leading-relaxed">
-            Construindo interfaces limpas, performáticas e acessíveis. 
+          {/* Typing subtitle */}
+          <div className="hero-typing-wrapper">
+            <span className="hero-typing-text">
+              {displayText}
+            </span>
+            <span className="hero-cursor">|</span>
+          </div>
+
+          {/* Description */}
+          <p className="hero-description">
+            Construindo interfaces limpas, performáticas e acessíveis.
             Foco em entregar valor real através do design e do código.
           </p>
+
+          {/* Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+            className="hero-buttons"
+          >
+            <a
+              href="/Curriculo-Bryan-Junqueira.pdf"
+              download="Bryan_Junqueira_CV.pdf"
+              className="hero-btn hero-btn--primary"
+            >
+              <FiDownload size={18} />
+              <span>Baixar CV</span>
+            </a>
+            <a
+              href="#contato"
+              onClick={handleContactClick}
+              className="hero-btn hero-btn--secondary"
+            >
+              <FiMail size={18} />
+              <span>Entrar em contato</span>
+            </a>
+          </motion.div>
         </motion.div>
       </div>
 
-      {/* Indicador de Scroll Clássico */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

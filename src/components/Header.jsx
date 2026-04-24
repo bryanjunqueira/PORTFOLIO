@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
-import { FiDownload } from 'react-icons/fi';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -14,6 +14,45 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrollState, setScrollState] = useState('top'); // 'top' | 'hidden' | 'visible'
+  const [theme, setTheme] = useState('dark');
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    // Inicializar o tema
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+    if (savedTheme === 'light') {
+      document.documentElement.classList.add('light-theme');
+    }
+
+    const handleScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY < 100) {
+          // Near the top — header is in normal flow
+          setScrollState('top');
+        } else if (currentScrollY < lastScrollY.current - 5) {
+          // Scrolling UP — show sticky header
+          setScrollState('visible');
+        } else if (currentScrollY > lastScrollY.current + 5) {
+          // Scrolling DOWN — hide sticky header
+          setScrollState('hidden');
+        }
+
+        lastScrollY.current = currentScrollY;
+        ticking.current = false;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleClick = (e, href) => {
     e.preventDefault();
@@ -22,36 +61,49 @@ export default function Header() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    if (newTheme === 'light') {
+      document.documentElement.classList.add('light-theme');
+    } else {
+      document.documentElement.classList.remove('light-theme');
+    }
+  };
+
+  // Build dynamic class based on scroll state
+  const headerClass = [
+    'header',
+    scrollState === 'top' ? 'header--top' : '',
+    scrollState === 'visible' ? 'header--sticky-visible' : '',
+    scrollState === 'hidden' ? 'header--sticky-hidden' : '',
+  ].filter(Boolean).join(' ');
+
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 50, padding: '40px 60px' }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-
-          {/* COLUNA 1 — Nome (esquerda) */}
-          <div className="flex-1">
+      <header className={headerClass}>
+        <div className="header-bar">
+          {/* Logo */}
+          <div className="header-col header-col--left">
             <a
               href="#home"
               onClick={(e) => handleClick(e, '#home')}
-              className="inline-block text-lg font-semibold tracking-wide text-white hover:text-text-secondary hover:scale-110 hover:-translate-y-2 transition-all duration-300"
+              className="header-logo"
             >
               Bryan Junqueira
             </a>
           </div>
 
-          {/* COLUNA 2 — Navegação (centro exato) */}
-          <div className="hidden md:flex flex-1 justify-center">
-            <nav className="flex items-center gap-8">
+          {/* Navigation (desktop) */}
+          <div className="header-col header-col--center">
+            <nav className="header-nav">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleClick(e, link.href)}
-                  className="inline-block text-sm font-medium text-text-muted hover:text-white hover:scale-125 hover:-translate-y-2 transition-all duration-300"
+                  className="header-nav__link"
                 >
                   {link.name}
                 </a>
@@ -59,39 +111,27 @@ export default function Header() {
             </nav>
           </div>
 
-          {/* COLUNA 3 — Baixar CV (direita) */}
-          <div className="flex-1 flex justify-end items-center gap-4">
-            <a
-              href="/Curriculo-Bryan-Junqueira.pdf"
-              download="Bryan_Junqueira_CV.pdf"
-              className="group hidden md:inline-flex items-center justify-center gap-3 text-sm font-medium rounded-lg border border-white/80 bg-transparent text-white hover:bg-white/10 hover:scale-110 hover:-translate-y-2 transition-all duration-300"
-              style={{ letterSpacing: 'normal', padding: '12px 28px' }}
+          {/* Right actions (Theme toggle + Mobile hamburger) */}
+          <div className="header-col header-col--right">
+            <button
+              onClick={toggleTheme}
+              className="header-theme-toggle"
+              aria-label="Alternar tema"
+              title="Alternar tema"
             >
-              <span style={{ lineHeight: '1' }}>Resume</span>
-              <FiDownload size={16} className="group-hover:translate-y-[3px] transition-transform duration-200" style={{ marginTop: '1px' }} />
-            </a>
+              {theme === 'dark' ? <FiSun size={20} /> : <FiMoon size={20} />}
+            </button>
 
-            {/* Mobile: CV compacto + hamburger */}
-            <a
-              href="/Curriculo-Bryan-Junqueira.pdf"
-              download="Bryan_Junqueira_CV.pdf"
-              className="md:hidden inline-flex items-center justify-center gap-2 text-sm font-medium rounded-lg border border-white/80 bg-transparent text-white"
-              style={{ letterSpacing: 'normal', padding: '10px 20px' }}
-            >
-              <span style={{ lineHeight: '1' }}>Resume</span>
-              <FiDownload size={14} style={{ marginTop: '1px' }} />
-            </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden text-text-secondary hover:text-white transition-colors"
+              className="header-hamburger"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
             </button>
           </div>
-
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -101,7 +141,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-0 z-40 bg-[#0a0a0a] pt-28 px-8 md:hidden"
+            className="fixed inset-0 z-[200] bg-[#0a0a0a] pt-28 px-8 md:hidden light-invert-ignore"
           >
             <nav className="flex flex-col gap-6">
               {navLinks.map((link, i) => (
