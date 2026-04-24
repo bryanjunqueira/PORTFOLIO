@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&family=DM+Mono:wght@300;400;500&display=swap');
 @import "tailwindcss";
 
 /* ===== Custom Theme ===== */
@@ -283,3 +283,545 @@ body {
   transform: translateX(-50%) scaleX(1);
 }
 
+/* ===== Projects Section ===== */
+
+/* Container centralizado com margens laterais generosas */
+.projects-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 768px) {
+  .projects-container {
+    padding: 0 24px;
+  }
+}
+
+/* Área interna dos cards — centralizada dentro do container */
+.projects-inner {
+  max-width: 640px;
+}
+
+/* Header da seção */
+.projects-header {
+  margin-bottom: 56px;
+}
+
+/* Grid: lado esquerdo com os cards empilhados */
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+}
+
+/* Coluna esquerda: Raizys em cima + Rota embaixo */
+.projects-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Card principal (Raizys) */
+.project-card-main {
+  aspect-ratio: 4 / 5;
+  min-height: 400px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .project-card-main {
+    aspect-ratio: 3 / 4;
+    min-height: 360px;
+  }
+}
+
+/* Coluna direita: vazia — reservada */
+.projects-right-col {
+  display: none;
+}
+
+/* Card "Em Breve" (Projeto de Rota) */
+.project-card-coming {
+  width: 100%;
+  min-height: 160px;
+  padding: 40px 24px;
+}
+
+@media (max-width: 900px) {
+  .project-card-coming {
+    min-height: 140px;
+    padding: 36px 24px;
+  }
+}
+
+/* Logo wrapper dentro do card principal */
+.project-logo-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+@media (max-width: 600px) {
+  .project-logo-wrapper {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+
+/* ===================================================
+   MODAL EDITORIAL — Raizys Case Study
+   =================================================== */
+
+/* Scrollbar fina dentro do modal */
+.modal-container::-webkit-scrollbar { width: 4px; }
+.modal-container::-webkit-scrollbar-track { background: transparent; }
+.modal-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+/* Wrapper externo do modal */
+.modal-container {
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: #0d0d0d;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 28px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  position: relative;
+}
+
+/* ── HERO ── */
+.modal-hero {
+  padding: 44px 48px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%);
+}
+
+@media (max-width: 640px) {
+  .modal-hero { padding: 32px 24px 28px; }
+}
+
+.modal-hero__identity {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.modal-hero__logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 20px rgba(255,255,255,0.12));
+}
+
+.modal-hero__eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 4px;
+}
+
+.modal-hero__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.modal-hero__subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.38);
+  font-weight: 300;
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* ── STACK DE TECNOLOGIAS ── */
+.modal-tech-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.modal-tech-strip__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  flex-shrink: 0;
+}
+
+.modal-tech-strip__tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.modal-tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.04);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.04em;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.modal-tech-tag:hover {
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
+}
+
+.modal-tech-tag__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dot);
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* ── DIVISÓRIA ── */
+.modal-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent);
+  margin: 0 48px;
+}
+
+@media (max-width: 640px) {
+  .modal-divider { margin: 0 24px; }
+}
+
+/* ── GALERIA EDITORIAL ── */
+.modal-gallery {
+  padding: 40px 48px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@media (max-width: 640px) {
+  .modal-gallery { padding: 28px 20px; gap: 32px; }
+}
+
+/* Row: imagem + texto */
+.modal-gallery__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.02);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.modal-gallery__row:hover {
+  border-color: rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.035);
+}
+
+/* Linha par: imagem esquerda → texto direita */
+.modal-gallery__row--normal {
+  grid-template-areas: 'img txt';
+}
+
+/* Linha ímpar: texto esquerda → imagem direita */
+.modal-gallery__row--reverse {
+  grid-template-areas: 'txt img';
+}
+
+@media (max-width: 680px) {
+  .modal-gallery__row,
+  .modal-gallery__row--normal,
+  .modal-gallery__row--reverse {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'img' 'txt';
+  }
+}
+
+/* Bloco de imagem */
+.modal-gallery__img-wrap {
+  grid-area: img;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #080808;
+  aspect-ratio: 16 / 9;
+}
+
+.modal-gallery__index {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.5);
+  padding: 2px 7px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.modal-gallery__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.modal-gallery__row:hover .modal-gallery__img {
+  transform: scale(1.03);
+}
+
+/* Bloco de texto */
+.modal-gallery__text {
+  grid-area: txt;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-gallery__text--right {
+  text-align: left;
+}
+
+.modal-gallery__text--left {
+  text-align: left;
+}
+
+.modal-gallery__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.modal-gallery__bar {
+  width: 32px;
+  height: 2px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+
+.modal-gallery__desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+}
+
+/* ── FOOTER ── */
+.modal-footer {
+  padding: 24px 48px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .modal-footer {
+    padding: 20px 24px 28px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.modal-footer__btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.modal-footer__btn:hover {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Botão "Acessar Projeto" */
+.modal-access-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.85);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.modal-access-btn:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.28);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ── IMAGEM DESTAQUE (hero visual do projeto) ── */
+.modal-featured {
+  padding: 28px 48px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .modal-featured { padding: 20px 20px 0; }
+}
+
+.modal-featured__img-wrap {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 16 / 7;
+  background: #060606;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.modal-featured__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+
+.modal-featured__img-wrap:hover .modal-featured__img {
+  transform: scale(1.025);
+}
+
+.modal-featured__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.modal-featured__img-wrap:hover .modal-featured__overlay {
+  background: rgba(0,0,0,0.45);
+}
+
+.modal-featured__zoom-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.modal-featured__img-wrap:hover .modal-featured__zoom-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal-featured__hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+/* ── BOTÃO TELA CHEIA nas rows da galeria ── */
+.modal-gallery__fullscreen-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.2s ease;
+  z-index: 3;
+  backdrop-filter: blur(4px);
+}
+
+.modal-gallery__img-wrap:hover .modal-gallery__fullscreen-btn {
+  opacity: 1;
+  transform: scale(1);
+  color: #fff;
+}
+
+/* ── LIGHTBOX ── */
+.lightbox-caption-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.lightbox-caption-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+  font-weight: 300;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
