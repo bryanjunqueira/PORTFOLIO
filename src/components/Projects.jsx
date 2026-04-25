@@ -1,69 +1,55 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { FiClock, FiX, FiMaximize2, FiExternalLink, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiClock, FiX, FiMaximize2, FiExternalLink, FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi';
 
-/* ─── Tecnologias do projeto Raizys ──────────────────────── */
-const raizysStack = [
-  { label: 'HTML',       dot: '#f16529' },
-  { label: 'CSS',        dot: '#2965f1' },
-  { label: 'JavaScript', dot: '#f7df1e' },
-];
+/* ═══════════════════════════════════════════════════════════════
+   DADOS DOS PROJETOS
+   ═══════════════════════════════════════════════════════════════ */
 
-/* ─── Galeria ─────────────────────────────────────────────── */
-const raizysGallery = [
+const projects = [
   {
-    id: 1,
-    image: '/projetos/raizys/raizys1.png',
-    title: 'Página Inicial',
-    description: 'Landing page principal apresentando a visão sobre ecossistemas corporativos e a importância de sistemas que sustentam operações essenciais.',
+    id: 'raizys',
+    title: 'Raizys',
+    description: 'Sistema de gestão e landing pages para ecossistema corporativo com foco em setores de Agro, Varejo e Transporte.',
+    cover: '/projetos/raizys/raizys1.png',
+    logo: '/projetos/raizys/logo.png',
+    url: 'https://www.raizys.com.br/',
+    stack: [
+      { label: 'HTML5',      svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+      { label: 'CSS3',       svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+      { label: 'JavaScript', svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg' },
+    ],
+    thumbnails: [
+      '/projetos/raizys/raizys1.png',
+      '/projetos/raizys/raizys2.png',
+      '/projetos/raizys/raizys6.png',
+    ],
+    gallery: [
+      { id: 1, image: '/projetos/raizys/raizys1.png', title: 'Página Inicial', description: 'Landing page principal apresentando a visão sobre ecossistemas corporativos e a importância de sistemas que sustentam operações essenciais.' },
+      { id: 2, image: '/projetos/raizys/raizys2.png', title: 'Pilares de Atuação', description: 'Apresentação detalhada dos serviços focados nos setores de Agro, Varejo e Transporte com valor claro para cada área.' },
+      { id: 3, image: '/projetos/raizys/raizys3.png', title: 'Rodapé e Navegação', description: 'Acesso simplificado às áreas institucionais, informações de parcerias e formulário limpo para inscrição em newsletter.' },
+      { id: 4, image: '/projetos/raizys/raizys4.png', title: 'Regulamento Oficial', description: 'Modal integrado em overlay detalhando as condições, regras e responsabilidades do Programa de Parceiros Indicadores.' },
+      { id: 5, image: '/projetos/raizys/raizys5.png', title: 'Formulário de Indicação', description: 'Página de registro minimalista e segura de leads e indicações para viabilizar um acompanhamento dinâmico focado em conversão.' },
+      { id: 6, image: '/projetos/raizys/raizys6.png', title: 'Raizys Empresarial', description: 'Impactante seção hero destacando a plataforma de gestão e automação colaborativa focada em rigor operacional robusto.' },
+      { id: 7, image: '/projetos/raizys/raizys7.png', title: 'Raizys Agro', description: 'Recorte visual da landing page especializada voltada para o rigoroso controle de propriedades, safras e produtores rurais integrados.' },
+      { id: 8, image: '/projetos/raizys/raizys8.png', title: 'Visão Mobile', description: 'Adaptação responsiva premium que mantém a sofisticação da marca sem perder performance para acessos via dispositivos móveis.' },
+    ],
+    detailedDescription: 'Desenvolvimento completo de landing pages institucionais e páginas de produto para a Raizys — plataforma de gestão e automação corporativa. O projeto abrange múltiplas páginas responsivas com foco em conversão, clareza visual e identidade de marca consistente nos setores de Agro, Varejo e Transporte.',
   },
   {
-    id: 2,
-    image: '/projetos/raizys/raizys2.png',
-    title: 'Pilares de Atuação',
-    description: 'Apresentação detalhada dos serviços focados nos setores de Agro, Varejo e Transporte com valor claro para cada área.',
-  },
-  {
-    id: 3,
-    image: '/projetos/raizys/raizys3.png',
-    title: 'Rodapé e Navegação',
-    description: 'Acesso simplificado às áreas institucionais, informações de parcerias e formulário limpo para inscrição em newsletter.',
-  },
-  {
-    id: 4,
-    image: '/projetos/raizys/raizys4.png',
-    title: 'Regulamento Oficial',
-    description: 'Modal integrado em overlay detalhando as condições, regras e responsabilidades do Programa de Parceiros Indicadores.',
-  },
-  {
-    id: 5,
-    image: '/projetos/raizys/raizys5.png',
-    title: 'Formulário de Indicação',
-    description: 'Página de registro minimalista e segura de leads e indicações para viabilizar um acompanhamento dinâmico focado em conversão.',
-  },
-  {
-    id: 6,
-    image: '/projetos/raizys/raizys6.png',
-    title: 'Raizys Empresarial',
-    description: 'Impactante seção hero destacando a plataforma de gestão e automação colaborativa focada em rigor operacional robusto.',
-  },
-  {
-    id: 7,
-    image: '/projetos/raizys/raizys7.png',
-    title: 'Raizys Agro',
-    description: 'Recorte visual da landing page especializada voltada para o rigoroso controle de propriedades, safras e produtores rurais integrados.',
-  },
-  {
-    id: 8,
-    image: '/projetos/raizys/raizys8.png',
-    title: 'Visão Mobile',
-    description: 'Adaptação responsiva premium que mantém a sofisticação da marca sem perder performance para acessos via dispositivos móveis.',
+    id: 'coming-soon',
+    title: 'Projeto de Rota',
+    badge: null,
+    description: 'Sistema de rastreamento GPS em tempo real para gestão de rotas e equipes em campo.',
+    cover: null,
+    comingSoon: true,
   },
 ];
 
-/* ─── Lightbox ──────────────────────────────────────────────
-   Exibe a imagem em tela cheia com navegação por teclado/clique
-*/
+/* ═══════════════════════════════════════════════════════════════
+   LIGHTBOX
+   ═══════════════════════════════════════════════════════════════ */
+
 function Lightbox({ images, startIndex, onClose }) {
   const [current, setCurrent] = useState(startIndex);
 
@@ -91,7 +77,6 @@ function Lightbox({ images, startIndex, onClose }) {
       className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/96 backdrop-blur-xl"
       onClick={onClose}
     >
-      {/* Fechar */}
       <button
         className="absolute top-5 right-5 z-10 p-2.5 rounded-full bg-white/8 hover:bg-white/15 border border-white/10 text-white/60 hover:text-white transition-all"
         onClick={onClose}
@@ -99,12 +84,10 @@ function Lightbox({ images, startIndex, onClose }) {
         <FiX size={20} />
       </button>
 
-      {/* Contador */}
       <span className="absolute top-5 left-1/2 -translate-x-1/2 font-mono text-xs text-white/30 tracking-widest">
         {String(current + 1).padStart(2,'0')} / {String(images.length).padStart(2,'0')}
       </span>
 
-      {/* Imagem */}
       <motion.img
         key={current}
         initial={{ opacity: 0, scale: 0.97 }}
@@ -116,13 +99,11 @@ function Lightbox({ images, startIndex, onClose }) {
         onClick={(e) => e.stopPropagation()}
       />
 
-      {/* Legenda */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center pointer-events-none">
         <p className="lightbox-caption-title">{item.title}</p>
         <p className="lightbox-caption-desc">{item.description}</p>
       </div>
 
-      {/* Setas */}
       {images.length > 1 && (
         <>
           <button
@@ -143,26 +124,293 @@ function Lightbox({ images, startIndex, onClose }) {
   );
 }
 
-/* ─── Componente principal ───────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   PROJECT CARD
+   ═══════════════════════════════════════════════════════════════ */
+
+function ProjectCard({ project, index, isInView, onOpen }) {
+  if (project.comingSoon) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.15 + index * 0.12, ease: 'easeOut' }}
+        className="proj-card proj-card--coming group"
+      >
+        <div className="proj-card__coming-inner">
+          <FiClock size={24} strokeWidth={1.5} />
+          <div>
+            <p className="proj-card__coming-title">{project.title}</p>
+            <p className="proj-card__coming-subtitle">Em breve</p>
+          </div>
+          {project.description && (
+            <p className="proj-card__coming-desc">{project.description}</p>
+          )}
+        </div>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: 0.15 + index * 0.12, ease: 'easeOut' }}
+      className="proj-card group"
+      onClick={() => onOpen(project)}
+    >
+      {/* Cover image */}
+      <div className="proj-card__cover">
+        <img
+          src={project.cover}
+          alt={project.title}
+          className="proj-card__cover-img"
+          loading="lazy"
+        />
+        <div className="proj-card__cover-overlay">
+          <div className="proj-card__cover-btn">
+            <FiSearch size={16} />
+            <span>Ver detalhes</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="proj-card__body">
+        <div className="proj-card__header">
+          <h3 className="proj-card__title">{project.title}</h3>
+        </div>
+
+        <p className="proj-card__desc">{project.description}</p>
+
+        {/* Stack — SVG icons from devicons CDN */}
+        {project.stack && (
+          <div className="proj-card__stack">
+            {project.stack.map((tech) => (
+              <img
+                key={tech.label}
+                src={tech.svg}
+                alt={tech.label}
+                title={tech.label}
+                className="proj-card__tech-icon"
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Thumbnails preview */}
+        {project.thumbnails && (
+          <div className="proj-card__thumbs">
+            {project.thumbnails.map((src, i) => (
+              <div key={i} className="proj-card__thumb">
+                <img src={src} alt="" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Footer */}
+        <div className="proj-card__footer">
+          <span className="proj-card__footer-link">
+            <FiSearch size={14} />
+            Ver detalhes
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PROJECT MODAL — Redesigned
+   ═══════════════════════════════════════════════════════════════ */
+
+function ProjectModal({ project, onClose, onLightbox }) {
+  if (!project) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-lg p-3 md:p-6 lg:p-10"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 md:top-6 md:right-6 z-50 text-white/50 hover:text-white bg-white/5 hover:bg-white/10 p-2.5 rounded-full backdrop-blur-md transition-all focus:outline-none border border-white/10 hover:scale-110"
+      >
+        <FiX size={20} />
+      </button>
+
+      <motion.div
+        initial={{ scale: 0.97, y: 16, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.97, y: 16, opacity: 0 }}
+        transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+        onClick={(e) => e.stopPropagation()}
+        className="modal-container"
+      >
+        {/* ── HERO: imagem grande + info overlay ── */}
+        <div className="modal-v2-hero">
+          {project.gallery && project.gallery.length > 0 && (
+            <div
+              className="modal-v2-hero__img-wrap"
+              onClick={() => onLightbox(0)}
+            >
+              <img
+                src={project.gallery[0].image}
+                alt={project.gallery[0].title}
+                className="modal-v2-hero__img"
+              />
+              <div className="modal-v2-hero__gradient" />
+            </div>
+          )}
+          <div className="modal-v2-hero__content">
+            <div className="modal-v2-hero__top">
+              {project.badge && (
+                <span className="modal-v2-hero__badge">{project.badge}</span>
+              )}
+            </div>
+            <div className="modal-v2-hero__bottom">
+              <h2 className="modal-v2-hero__title">{project.title}</h2>
+              <p className="modal-v2-hero__subtitle">{project.description}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* ── BODY: description + stack side by side ── */}
+        <div className="modal-v2-body">
+          <div className="modal-v2-body__main">
+            <div className="modal-v2-label">Descrição</div>
+            <p className="modal-v2-body__text">{project.detailedDescription}</p>
+          </div>
+          <div className="modal-v2-body__side">
+            <div className="modal-v2-label">Tecnologias</div>
+            <div className="modal-v2-body__techs">
+              {project.stack && project.stack.map((tech) => (
+                <div key={tech.label} className="modal-v2-tech-chip">
+                  <img src={tech.svg} alt={tech.label} className="modal-v2-tech-chip__icon" />
+                  <span>{tech.label}</span>
+                </div>
+              ))}
+            </div>
+            {project.url && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="modal-v2-access-btn"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <FiExternalLink size={15} />
+                Acessar Projeto
+              </a>
+            )}
+          </div>
+        </div>
+
+        <div className="modal-divider" />
+
+        {/* ── GALERIA ── */}
+        {project.gallery && (
+          <div className="modal-gallery">
+            {project.gallery.map((item, idx) => {
+              const isEven = idx % 2 === 0;
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, delay: 0.04 }}
+                  className={`modal-gallery__row ${isEven ? 'modal-gallery__row--normal' : 'modal-gallery__row--reverse'}`}
+                >
+                  <div
+                    className="modal-gallery__img-wrap group/img"
+                    onClick={() => onLightbox(idx)}
+                    title="Ver em tela cheia"
+                  >
+                    <span className="modal-gallery__index">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="modal-gallery__img"
+                      loading="lazy"
+                    />
+                    <div className="modal-gallery__fullscreen-btn">
+                      <FiMaximize2 size={14} />
+                    </div>
+                  </div>
+                  <div className={`modal-gallery__text ${isEven ? 'modal-gallery__text--left' : 'modal-gallery__text--right'}`}>
+                    <h3 className="modal-gallery__title">{item.title}</h3>
+                    <div className="modal-gallery__bar" />
+                    <p className="modal-gallery__desc">{item.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* ── FOOTER ── */}
+        <div className="modal-footer">
+          <button onClick={onClose} className="modal-footer__btn">
+            ← Fechar
+          </button>
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="modal-v2-access-btn"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FiExternalLink size={15} />
+              Acessar Projeto
+            </a>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENTE PRINCIPAL
+   ═══════════════════════════════════════════════════════════════ */
+
 export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
-  const [isModalOpen,    setIsModalOpen]    = useState(false);
-  const [lightboxIndex,  setLightboxIndex]  = useState(null); // null = fechado
+  const [activeProject, setActiveProject] = useState(null);
+  const [lightboxIndex, setLightboxIndex]  = useState(null);
 
-  /* Bloqueia scroll do body */
+  /* Lock scroll and hide header */
   useEffect(() => {
-    const locked = isModalOpen || lightboxIndex !== null;
+    const locked = activeProject !== null || lightboxIndex !== null;
     document.body.style.overflow     = locked ? 'hidden' : '';
     document.body.style.paddingRight = locked ? '8px'    : '';
-    return () => { document.body.style.overflow = ''; document.body.style.paddingRight = ''; };
-  }, [isModalOpen, lightboxIndex]);
+    if (locked) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+    return () => { 
+      document.body.style.overflow = ''; 
+      document.body.style.paddingRight = ''; 
+      document.body.classList.remove('modal-open');
+    };
+  }, [activeProject, lightboxIndex]);
 
-  /* ESC fecha modal principal */
+  /* ESC closes modal */
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === 'Escape' && lightboxIndex === null) setIsModalOpen(false);
+      if (e.key === 'Escape' && lightboxIndex === null) setActiveProject(null);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -173,239 +421,55 @@ export default function Projects() {
 
   return (
     <>
-      {/* ══════════ SEÇÃO PROJETOS ══════════ */}
       <section id="projetos" className="section-padding relative z-10">
-        <div className="projects-container" ref={ref}>
+        <div className="proj-section" ref={ref}>
 
-          {/* Header */}
+          {/* Section title — left aligned */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            className="proj-section__title-wrap"
+            initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="projects-header"
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <h2 className="text-3xl font-semibold mb-3">Projetos em Destaque</h2>
-            <p className="text-text-secondary text-base font-light">
-              Uma imersão na arquitetura e visual dos principais trabalhos recentes.
-            </p>
+            <h2 className="proj-section__title-text">Projetos em Destaque</h2>
+            <p className="proj-section__title-sub">Uma imersão nos principais trabalhos recentes.</p>
           </motion.div>
 
-          {/* Cards */}
-          <div className="projects-grid">
-            <div className="projects-left-col">
-
-              {/* Card Raizys */}
-              <motion.div
-                initial={{ opacity: 0, y: 32 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.15, ease: 'easeOut' }}
-                onClick={() => setIsModalOpen(true)}
-                className="project-card-main group card-glass rounded-[1.75rem] overflow-hidden cursor-pointer relative flex flex-col items-center justify-center"
-              >
-                <div className="absolute inset-0 bg-dark-card/95 transition-opacity duration-700 group-hover:bg-dark-card/55 z-0" />
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-15 transition-opacity duration-1000 z-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${raizysGallery[0].image})` }}
-                />
-                <div className="relative z-10 flex flex-col items-center justify-center text-center p-8 gap-6">
-                  <div className="project-logo-wrapper transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-3">
-                    <img
-                      src="/projetos/raizys/logo.png"
-                      alt="Logo Raízes"
-                      className="w-full h-full object-contain drop-shadow-2xl"
-                      onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                    />
-                    <div className="hidden absolute inset-0 items-center justify-center border-2 border-dashed border-white/20 rounded-xl flex-col gap-2">
-                      <span className="text-sm font-medium text-text-muted">Raizys</span>
-                    </div>
-                  </div>
-                  <span className="text-sm font-medium text-white/60 tracking-[0.25em] uppercase opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">
-                    Explorar Visuais →
-                  </span>
-                </div>
-                <div className="absolute top-5 left-5 z-10 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                  <span className="text-[11px] font-medium text-white/50 tracking-widest uppercase">Website</span>
-                </div>
-              </motion.div>
-
-              {/* Card Projeto de Rota */}
-              <motion.div
-                initial={{ opacity: 0, y: 32 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.28, ease: 'easeOut' }}
-                className="project-card-coming group card-glass rounded-[1.75rem] overflow-hidden flex flex-col items-center justify-center border border-dashed border-white/[0.06] bg-dark-card/20 hover:border-white/[0.12] transition-colors duration-500 relative"
-              >
-                <div className="flex flex-col items-center gap-4 text-text-muted opacity-50 group-hover:opacity-90 transition-all duration-400 px-8 text-center">
-                  <FiClock size={28} strokeWidth={1.5} className="opacity-70" />
-                  <div>
-                    <p className="text-lg font-serif tracking-wide text-white/65 mb-1">Projeto de Rota</p>
-                    <p className="text-[11px] font-light uppercase tracking-[0.3em] opacity-60">Em breve</p>
-                  </div>
-                </div>
-              </motion.div>
-
-            </div>
-            <div className="projects-right-col" />
+          {/* Grid */}
+          <div className="proj-grid">
+            {projects.map((project, i) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={i}
+                isInView={isInView}
+                onOpen={setActiveProject}
+              />
+            ))}
           </div>
 
         </div>
       </section>
 
-      {/* ══════════ LIGHTBOX ══════════ */}
+      {/* LIGHTBOX */}
       <AnimatePresence>
-        {lightboxIndex !== null && (
+        {lightboxIndex !== null && activeProject?.gallery && (
           <Lightbox
-            images={raizysGallery}
+            images={activeProject.gallery}
             startIndex={lightboxIndex}
             onClose={closeLightbox}
           />
         )}
       </AnimatePresence>
 
-      {/* ══════════ MODAL EDITORIAL ══════════ */}
+      {/* MODAL */}
       <AnimatePresence>
-        {isModalOpen && lightboxIndex === null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 backdrop-blur-lg p-3 md:p-6 lg:p-10"
-            onClick={() => setIsModalOpen(false)}
-          >
-            {/* Botão fechar */}
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 md:top-6 md:right-6 z-50 text-white/50 hover:text-white bg-white/5 hover:bg-white/10 p-2.5 rounded-full backdrop-blur-md transition-all focus:outline-none border border-white/10 hover:scale-110"
-            >
-              <FiX size={20} />
-            </button>
-
-            <motion.div
-              initial={{ scale: 0.97, y: 16, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.97, y: 16, opacity: 0 }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()}
-              className="modal-container"
-            >
-
-              {/* ── HERO do modal ── */}
-              <div className="modal-hero">
-                <div className="modal-hero__identity">
-                  <img src="/projetos/raizys/logo.png" alt="Logo Raizys" className="modal-hero__logo" />
-                  <div>
-                    <p className="modal-hero__eyebrow">Case Study</p>
-                    <h2 className="modal-hero__title">Raizys</h2>
-                    <p className="modal-hero__subtitle">Sistema de Gestão & Landing Pages</p>
-                  </div>
-                </div>
-                <div className="modal-tech-strip">
-                  <span className="modal-tech-strip__label">Stack</span>
-                  <div className="modal-tech-strip__tags">
-                    {raizysStack.map((tech) => (
-                      <span key={tech.label} className="modal-tech-tag" style={{ '--dot': tech.dot }}>
-                        <span className="modal-tech-tag__dot" />
-                        {tech.label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* ── IMAGEM DESTAQUE (hero visual do projeto) ── */}
-              <div className="modal-featured">
-                <div
-                  className="modal-featured__img-wrap group"
-                  onClick={() => openLightbox(0)}
-                  title="Ver em tela cheia"
-                >
-                  <img
-                    src={raizysGallery[0].image}
-                    alt="Raizys — Página Inicial"
-                    className="modal-featured__img"
-                  />
-                  {/* Overlay com ícone de zoom */}
-                  <div className="modal-featured__overlay">
-                    <div className="modal-featured__zoom-btn">
-                      <FiMaximize2 size={18} />
-                      <span>Ver em tela cheia</span>
-                    </div>
-                  </div>
-                </div>
-                <p className="modal-featured__hint">↑ Clique para expandir · Role para ver todas as telas</p>
-              </div>
-
-              <div className="modal-divider" />
-
-              {/* ── GALERIA EDITORIAL ── */}
-              <div className="modal-gallery">
-                {raizysGallery.map((item, idx) => {
-                  const isEven = idx % 2 === 0;
-                  return (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, y: 24 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: '-60px' }}
-                      transition={{ duration: 0.5, delay: 0.04 }}
-                      className={`modal-gallery__row ${isEven ? 'modal-gallery__row--normal' : 'modal-gallery__row--reverse'}`}
-                    >
-                      {/* Imagem compacta */}
-                      <div
-                        className="modal-gallery__img-wrap group/img"
-                        onClick={() => openLightbox(idx)}
-                        title="Ver em tela cheia"
-                      >
-                        <span className="modal-gallery__index">
-                          {String(idx + 1).padStart(2, '0')}
-                        </span>
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="modal-gallery__img"
-                          loading="lazy"
-                        />
-                        {/* Botão tela cheia ao hover */}
-                        <div className="modal-gallery__fullscreen-btn">
-                          <FiMaximize2 size={14} />
-                        </div>
-                      </div>
-
-                      {/* Texto */}
-                      <div className={`modal-gallery__text ${isEven ? 'modal-gallery__text--left' : 'modal-gallery__text--right'}`}>
-                        <h3 className="modal-gallery__title">{item.title}</h3>
-                        <div className="modal-gallery__bar" />
-                        <p className="modal-gallery__desc">{item.description}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              {/* ── FOOTER com botão Acessar Projeto ── */}
-              <div className="modal-footer">
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="modal-footer__btn"
-                >
-                  ← Fechar
-                </button>
-
-                <a
-                  href="https://www.raizys.com.br/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="modal-access-btn"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <FiExternalLink size={15} />
-                  Acessar Projeto
-                </a>
-              </div>
-
-            </motion.div>
-          </motion.div>
+        {activeProject && lightboxIndex === null && (
+          <ProjectModal
+            project={activeProject}
+            onClose={() => setActiveProject(null)}
+            onLightbox={openLightbox}
+          />
         )}
       </AnimatePresence>
     </>
