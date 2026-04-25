@@ -420,6 +420,22 @@ html.light-theme .light-invert-ignore {
 }
 
 /* ===== About Section ===== */
+
+/* Section icon */
+.about-section-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
 .about-intro {
   text-align: center;
   max-width: 680px;
@@ -606,6 +622,253 @@ html.light-theme .light-invert-ignore {
 .about-card:hover .about-card__bar {
   transform: translateX(-50%) scaleX(1);
 }
+
+/* ===== Tech Marquee Section ===== */
+
+.tech-marquee-section {
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Barra decorativa vertical esquerda ── */
+.tech-marquee-accent {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 20%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+}
+
+.tech-marquee-accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 30%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  animation: accent-pulse 3s ease-in-out infinite;
+}
+
+@keyframes accent-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* ── Container com max-width alinhado ao About ── */
+.tech-marquee-container {
+  max-width: 72rem; /* 1152px — mesmo que max-w-6xl do About */
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .tech-marquee-container {
+    padding: 0 48px;
+  }
+}
+
+/* ── Viewport (área visível do marquee) ── */
+.tech-marquee-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* ── Fade nas bordas ── */
+.tech-marquee-fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.tech-marquee-fade--left {
+  left: 0;
+  background: linear-gradient(90deg, #0a0a0a 0%, transparent 100%);
+}
+
+.tech-marquee-fade--right {
+  right: 0;
+  background: linear-gradient(270deg, #0a0a0a 0%, transparent 100%);
+}
+
+/* ── Track que rola ── */
+.tech-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+  padding: 20px 0;
+}
+
+.tech-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+/* ── Título centralizado ── */
+.tech-marquee-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.tech-marquee-title__text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.tech-marquee-title__underline {
+  display: block;
+  width: 36px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+}
+
+/* ── Cada item do marquee ── */
+.tech-marquee-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  cursor: default;
+  transition: transform 0.3s ease;
+}
+
+.tech-marquee-item:hover {
+  transform: translateY(-4px);
+}
+
+.tech-marquee-item__icon-wrap {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.35s ease, border-color 0.35s ease,
+              box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.tech-marquee-item:hover .tech-marquee-item__icon-wrap {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 15%, transparent);
+  transform: scale(1.08);
+}
+
+.tech-marquee-item__icon {
+  width: 24px;
+  height: 24px;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.35s ease;
+}
+
+.tech-marquee-item:hover .tech-marquee-item__icon {
+  color: var(--accent);
+}
+
+.tech-marquee-item__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.2);
+  transition: color 0.35s ease;
+  white-space: nowrap;
+}
+
+.tech-marquee-item:hover .tech-marquee-item__label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .tech-marquee-section {
+    padding: 56px 0;
+  }
+
+  .tech-marquee-container {
+    padding: 0 16px;
+  }
+
+  .tech-marquee-fade {
+    width: 40px;
+  }
+
+  .tech-marquee-track {
+    gap: 28px;
+    animation-duration: 22s;
+  }
+
+  .tech-marquee-item__icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .tech-marquee-item__icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tech-marquee-title {
+    margin-bottom: 20px;
+  }
+
+  .tech-marquee-title__text {
+    font-size: 0.68rem;
+  }
+}
+
 
 /* ===== Projects Section ===== */
 

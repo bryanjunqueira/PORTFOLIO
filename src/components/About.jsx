@@ -1,6 +1,6 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { FiCode, FiServer, FiTool, FiChevronDown } from 'react-icons/fi';
+import { FiCode, FiServer, FiTool, FiChevronDown, FiUser } from 'react-icons/fi';
 
 const focusAreas = [
   {
@@ -101,11 +101,21 @@ export default function About() {
     <section id="sobre" className="min-h-screen flex items-center justify-center py-24">
       <div ref={sectionRef} className="max-w-6xl mx-auto px-6 lg:px-12 w-full">
 
+        {/* ── Ícone de seção ── */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="about-section-icon"
+        >
+          <FiUser size={20} strokeWidth={1.5} />
+        </motion.div>
+
         {/* ── Texto introdutório ── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
           className="about-intro"
         >
           <p className="about-intro-text">
