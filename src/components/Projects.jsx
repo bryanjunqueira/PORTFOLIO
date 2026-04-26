@@ -1,6 +1,6 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { FiClock, FiX, FiMaximize2, FiExternalLink, FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi';
+import { FiX, FiMaximize2, FiExternalLink, FiChevronLeft, FiChevronRight, FiArrowRight } from 'react-icons/fi';
 
 /* ═══════════════════════════════════════════════════════════════
    DADOS DOS PROJETOS
@@ -10,6 +10,7 @@ const projects = [
   {
     id: 'raizys',
     title: 'Raizys',
+    badge: 'DESTAQUE',
     description: 'Sistema de gestão e landing pages para ecossistema corporativo com foco em setores de Agro, Varejo e Transporte.',
     cover: '/projetos/raizys/raizys1.png',
     logo: '/projetos/raizys/logo.png',
@@ -18,11 +19,7 @@ const projects = [
       { label: 'HTML5',      svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
       { label: 'CSS3',       svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
       { label: 'JavaScript', svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg' },
-    ],
-    thumbnails: [
-      '/projetos/raizys/raizys1.png',
-      '/projetos/raizys/raizys2.png',
-      '/projetos/raizys/raizys6.png',
+      { label: 'Python',     svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
     ],
     gallery: [
       { id: 1, image: '/projetos/raizys/raizys1.png', title: 'Página Inicial', description: 'Landing page principal apresentando a visão sobre ecossistemas corporativos e a importância de sistemas que sustentam operações essenciais.' },
@@ -37,12 +34,54 @@ const projects = [
     detailedDescription: 'Desenvolvimento completo de landing pages institucionais e páginas de produto para a Raizys — plataforma de gestão e automação corporativa. O projeto abrange múltiplas páginas responsivas com foco em conversão, clareza visual e identidade de marca consistente nos setores de Agro, Varejo e Transporte.',
   },
   {
-    id: 'coming-soon',
-    title: 'Projeto de Rota',
-    badge: null,
-    description: 'Sistema de rastreamento GPS em tempo real para gestão de rotas e equipes em campo.',
-    cover: null,
-    comingSoon: true,
+    id: 'guarutoner-gps',
+    title: 'Projeto de Rota - GPS',
+    badge: 'DESTAQUE',
+    description: 'Aplicação completa de gestão de atendimentos em campo com rastreamento GPS em tempo real, controle de rotas e relatórios operacionais.',
+    cover: '/projetos/projeto-gps-rota/gps01.jpeg',
+    stack: [
+      { label: 'HTML5',      svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+      { label: 'CSS3',       svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+      { label: 'JavaScript', svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg' },
+      { label: 'Node.js',    svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+      { label: 'PostgreSQL', svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+    ],
+    gallery: [
+      { id: 1, image: '/projetos/projeto-gps-rota/gps01.jpeg', title: 'Dashboard Operacional', description: 'Painel principal do gestor com mapa interativo em tempo real via Leaflet, exibindo localização GPS dos técnicos, status de rota e lista de destinos atribuídos.' },
+      { id: 2, image: '/projetos/projeto-gps-rota/gps02.jpeg', title: 'Gestão de Rota do Técnico', description: 'Interface do técnico para gerenciar a fila de clientes com controles de próximo cliente, finalização de rota, edição por drag-and-drop e coordenadas GPS em tempo real.' },
+      { id: 3, image: '/projetos/projeto-gps-rota/gps03.jpeg', title: 'Histórico de Atendimentos', description: 'Relatório completo com registros de todos os atendimentos concluídos organizados por data, técnico responsável e horário exato de conclusão.' },
+      { id: 4, image: '/projetos/projeto-gps-rota/gps04.jpeg', title: 'Gestão de Equipe', description: 'Painel de equipe exibindo todos os membros cadastrados com seus respectivos cargos (Técnico/Gestor) e métricas de atendimentos concluídos.' },
+      { id: 5, image: '/projetos/projeto-gps-rota/gps05.jpg', title: 'Mapa em Tempo Real — Mobile', description: 'Versão mobile responsiva do dashboard com mapa GPS, informações de localização do técnico e lista de destinos da rota atual.' },
+      { id: 6, image: '/projetos/projeto-gps-rota/gps06.jpg', title: 'Fila de Clientes — Mobile', description: 'Interface mobile otimizada para o técnico com visualização do cliente atual, fila de atendimentos, coordenadas e ações rápidas.' },
+      { id: 7, image: '/projetos/projeto-gps-rota/gps07.jpg', title: 'Relatórios — Mobile', description: 'Histórico de atendimentos adaptado para dispositivos móveis com cards expansíveis, badges de status e organização cronológica.' },
+      { id: 8, image: '/projetos/projeto-gps-rota/gps08.jpg', title: 'Equipe — Mobile', description: 'Painel de equipe na versão mobile com cards individuais para cada membro, exibindo cargo, ícone de função e contador de produtividade.' },
+    ],
+    detailedDescription: 'Desenvolvi uma aplicação de gestão de atendimentos em campo focada em resolver um problema real de operação: falta de controle, rastreabilidade e organização.\n\nO sistema permite que o técnico gerencie suas rotas e atendimentos de forma estruturada, enquanto o gestor acompanha tudo em tempo real, incluindo localização via GPS, progresso das rotas e histórico completo das atividades.\n\nToda a aplicação foi pensada com foco em persistência de dados, continuidade de operação mesmo sem conexão e organização das informações para tomada de decisão. Mais do que um sistema funcional, é uma solução voltada para transformar processos manuais em um fluxo digital eficiente e confiável.',
+  },
+  {
+    id: 'missao-heroi',
+    title: 'Missão do Herói',
+    badge: 'DESTAQUE',
+    description: 'Jogo RPG desenvolvido com Canvas API, rodando a 60 FPS com sistemas de IA, missões, colisões e efeitos sonoros.',
+    cover: '/projetos/Missão do Herói - Faculdade/jogo01.jpeg',
+    stack: [
+      { label: 'React',      svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+      { label: 'Vite',       svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg' },
+      { label: 'Tailwind',   svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+      { label: 'JavaScript', svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg' },
+      { label: 'HTML5',      svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+      { label: 'CSS3',       svg: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+    ],
+    gallery: [
+      { id: 1, image: '/projetos/Missão do Herói - Faculdade/jogo01.jpeg', title: 'Menu Inicial', description: 'Interface desenvolvida com Tailwind CSS, apresentando um design responsivo e efeitos sonoros desde a tela principal.' },
+      { id: 2, image: '/projetos/Missão do Herói - Faculdade/jogo02.jpeg', title: 'Game Loop', description: 'Motor customizado utilizando Canvas API para manter a renderização gráfica fluida a 60 FPS consistentes.' },
+      { id: 3, image: '/projetos/Missão do Herói - Faculdade/jogo03.jpeg', title: 'Sistema de Classes', description: 'Arquitetura orientada a objetos para gerenciar o estado, atributos e comportamentos de jogadores, NPCs e inimigos.' },
+      { id: 4, image: '/projetos/Missão do Herói - Faculdade/jogo04.jpeg', title: 'Inteligência Artificial', description: 'Sistema de pathfinding e perseguição para inimigos garantindo um combate dinâmico e estratégico.' },
+      { id: 5, image: '/projetos/Missão do Herói - Faculdade/jogo05.jpeg', title: 'Detecção de Colisão', description: 'Física customizada para o mapa interativo, gerenciando paredes, obstáculos, projéteis e interações com baús.' },
+      { id: 6, image: '/projetos/Missão do Herói - Faculdade/jogo06.jpeg', title: 'Sistema de Missões', description: 'Logística de quests e objetivos variados em tempo real que ditam a progressão do herói.' },
+      { id: 7, type: 'video', image: '/projetos/Missão do Herói - Faculdade/jogo14.mp4', title: 'Gameplay Completa', description: 'Vídeo demonstrativo com as mecânicas, trilha sonora, movimentação de IA e combates do projeto rodando em tempo real.' }
+    ],
+    detailedDescription: 'Projeto acadêmico com o desenvolvimento de um RPG 2D construído do zero. O motor gráfico foi desenvolvido utilizando a Canvas API para máxima performance gráfica a 60 FPS, gerenciado pelo Vite e React 19. A aplicação destaca-se por não utilizar bibliotecas prontas de jogos (como Phaser), implementando manualmente todos os sistemas avançados: loop de renderização, lógica de orientação a objetos, algoritmos de colisão física, e inteligência artificial (IA) para controle de inimigos e perseguição. \n\nO projeto possui sistema de missões, trilha sonora interativa e interface estilizada com Tailwind CSS.',
   },
 ];
 
@@ -88,16 +127,30 @@ function Lightbox({ images, startIndex, onClose }) {
         {String(current + 1).padStart(2,'0')} / {String(images.length).padStart(2,'0')}
       </span>
 
-      <motion.img
-        key={current}
-        initial={{ opacity: 0, scale: 0.97 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.25 }}
-        src={item.image}
-        alt={item.title}
-        className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      />
+      {item.type === 'video' ? (
+        <motion.video
+          key={current}
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.25 }}
+          src={item.image}
+          controls
+          autoPlay
+          className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        />
+      ) : (
+        <motion.img
+          key={current}
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.25 }}
+          src={item.image}
+          alt={item.title}
+          className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        />
+      )}
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center pointer-events-none">
         <p className="lightbox-caption-title">{item.title}</p>
@@ -125,96 +178,45 @@ function Lightbox({ images, startIndex, onClose }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   PROJECT CARD
+   PROJECT CARD — Grid layout inspired by reference
    ═══════════════════════════════════════════════════════════════ */
 
-function ProjectCard({ project, index, isInView, onOpen }) {
-  if (project.comingSoon) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.15 + index * 0.12, ease: 'easeOut' }}
-        className="proj-card proj-card--coming group"
-      >
-        <div className="proj-card__coming-inner">
-          <FiClock size={24} strokeWidth={1.5} />
-          <div>
-            <p className="proj-card__coming-title">{project.title}</p>
-            <p className="proj-card__coming-subtitle">Em breve</p>
-          </div>
-          {project.description && (
-            <p className="proj-card__coming-desc">{project.description}</p>
-          )}
-        </div>
-      </motion.div>
-    );
-  }
+function ProjectCardGrid({ project, index, isInView, onOpen }) {
+  // Show max 4 icons in the stack, and a badge with the remaining count
+  const displayStack = project.stack.slice(0, 4);
+  const remainingCount = project.stack.length - 4;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 32 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: 0.15 + index * 0.12, ease: 'easeOut' }}
-      className="proj-card group"
+      transition={{ duration: 0.8, delay: 0.1 * index, ease: 'easeOut' }}
+      className="proj-card-grid"
       onClick={() => onOpen(project)}
     >
-      {/* Cover image */}
-      <div className="proj-card__cover">
-        <img
-          src={project.cover}
-          alt={project.title}
-          className="proj-card__cover-img"
-          loading="lazy"
-        />
-        <div className="proj-card__cover-overlay">
-          <div className="proj-card__cover-btn">
-            <FiSearch size={16} />
-            <span>Ver detalhes</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="proj-card__body">
-        <div className="proj-card__header">
-          <h3 className="proj-card__title">{project.title}</h3>
-        </div>
-
-        <p className="proj-card__desc">{project.description}</p>
-
-        {/* Stack — SVG icons from devicons CDN */}
-        {project.stack && (
-          <div className="proj-card__stack">
-            {project.stack.map((tech) => (
-              <img
-                key={tech.label}
-                src={tech.svg}
-                alt={tech.label}
-                title={tech.label}
-                className="proj-card__tech-icon"
-              />
-            ))}
-          </div>
+      <div className="proj-card-grid__cover">
+        {project.badge && (
+          <div className="proj-card-grid__badge">{project.badge}</div>
         )}
-
-        {/* Thumbnails preview */}
-        {project.thumbnails && (
-          <div className="proj-card__thumbs">
-            {project.thumbnails.map((src, i) => (
-              <div key={i} className="proj-card__thumb">
-                <img src={src} alt="" loading="lazy" />
+        <img src={project.cover} alt={project.title} className="proj-card-grid__img" loading="lazy" />
+      </div>
+      <div className="proj-card-grid__body">
+        <h3 className="proj-card-grid__title">
+          {project.title} <FiArrowRight className="proj-card-grid__arrow" />
+        </h3>
+        <p className="proj-card-grid__desc">{project.description}</p>
+        <div className="proj-card-grid__footer">
+          <div className="proj-card-grid__stack">
+            {displayStack.map((tech, i) => (
+              <div key={i} className="proj-card-grid__tech-icon">
+                <img src={tech.svg} alt={tech.label} title={tech.label} />
               </div>
             ))}
+            {remainingCount > 0 && (
+              <div className="proj-card-grid__tech-more">+{remainingCount}</div>
+            )}
           </div>
-        )}
-
-        {/* Footer */}
-        <div className="proj-card__footer">
-          <span className="proj-card__footer-link">
-            <FiSearch size={14} />
-            Ver detalhes
-          </span>
+          <span className="proj-card-grid__link">Ver Detalhes</span>
         </div>
       </div>
     </motion.div>
@@ -222,7 +224,7 @@ function ProjectCard({ project, index, isInView, onOpen }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   PROJECT MODAL — Redesigned
+   PROJECT MODAL
    ═══════════════════════════════════════════════════════════════ */
 
 function ProjectModal({ project, onClose, onLightbox }) {
@@ -252,7 +254,7 @@ function ProjectModal({ project, onClose, onLightbox }) {
         onClick={(e) => e.stopPropagation()}
         className="modal-container"
       >
-        {/* ── HERO: imagem grande + info overlay ── */}
+        {/* ── HERO ── */}
         <div className="modal-v2-hero">
           {project.gallery && project.gallery.length > 0 && (
             <div
@@ -268,11 +270,7 @@ function ProjectModal({ project, onClose, onLightbox }) {
             </div>
           )}
           <div className="modal-v2-hero__content">
-            <div className="modal-v2-hero__top">
-              {project.badge && (
-                <span className="modal-v2-hero__badge">{project.badge}</span>
-              )}
-            </div>
+            <div className="modal-v2-hero__top" />
             <div className="modal-v2-hero__bottom">
               <h2 className="modal-v2-hero__title">{project.title}</h2>
               <p className="modal-v2-hero__subtitle">{project.description}</p>
@@ -280,7 +278,7 @@ function ProjectModal({ project, onClose, onLightbox }) {
           </div>
         </div>
 
-        {/* ── BODY: description + stack side by side ── */}
+        {/* ── BODY ── */}
         <div className="modal-v2-body">
           <div className="modal-v2-body__main">
             <div className="modal-v2-label">Descrição</div>
@@ -335,12 +333,21 @@ function ProjectModal({ project, onClose, onLightbox }) {
                     <span className="modal-gallery__index">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="modal-gallery__img"
-                      loading="lazy"
-                    />
+                    {item.type === 'video' ? (
+                      <video
+                        src={item.image}
+                        className="modal-gallery__img"
+                        muted
+                        preload="metadata"
+                      />
+                    ) : (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="modal-gallery__img"
+                        loading="lazy"
+                      />
+                    )}
                     <div className="modal-gallery__fullscreen-btn">
                       <FiMaximize2 size={14} />
                     </div>
@@ -424,7 +431,7 @@ export default function Projects() {
       <section id="projetos" className="section-padding relative z-10">
         <div className="proj-section" ref={ref}>
 
-          {/* Section title — left aligned */}
+          {/* Section title */}
           <motion.div
             className="proj-section__title-wrap"
             initial={{ opacity: 0, y: 16 }}
@@ -435,10 +442,10 @@ export default function Projects() {
             <p className="proj-section__title-sub">Uma imersão nos principais trabalhos recentes.</p>
           </motion.div>
 
-          {/* Grid */}
-          <div className="proj-grid">
+          {/* Project grid */}
+          <div className="proj-grid-container">
             {projects.map((project, i) => (
-              <ProjectCard
+              <ProjectCardGrid
                 key={project.id}
                 project={project}
                 index={i}

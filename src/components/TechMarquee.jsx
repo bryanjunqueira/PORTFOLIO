@@ -38,8 +38,7 @@ export default function TechMarquee() {
   return (
     <section id="tecnologias" className="tech-marquee-section" ref={ref}>
 
-      {/* ── Barra vertical decorativa na esquerda ── */}
-      <div className="tech-marquee-accent" />
+      {/* A barra decorativa gigante foi removida */}
 
       {/* ── Título centralizado acima dos ícones ── */}
       <motion.div
