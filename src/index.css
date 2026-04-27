@@ -1967,3 +1967,253 @@ html.light-theme .light-invert-ignore {
   opacity: 1;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   CONTACT SECTION
+   ═══════════════════════════════════════════════════════════════ */
+
+.contact-section {
+  position: relative;
+  z-index: 10;
+  background: #0a0a0a;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+}
+
+/* Ambient glow — black & white */
+.contact-glow {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.025) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 100px 32px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* ── Animated ring icon ── */
+.contact-icon-ring {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+  position: relative;
+  animation: ring-glow 3s ease-in-out infinite;
+}
+
+.contact-icon-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  animation: dot-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ring-glow {
+  0%, 100% { border-color: rgba(255, 255, 255, 0.08); }
+  50% { border-color: rgba(255, 255, 255, 0.2); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+/* ── Title ── */
+.contact-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.contact-title--highlight {
+  background: linear-gradient(135deg, #00e5ff, #00bcd4, #00d9c4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+/* ── Description ── */
+.contact-description {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 300;
+  max-width: 480px;
+  margin-bottom: 48px;
+  letter-spacing: 0.01em;
+}
+
+/* ── Buttons (base) ── */
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: all 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.contact-btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-btn__label {
+  line-height: 1;
+}
+
+/* ── WhatsApp — green ── */
+.contact-btn--whatsapp:hover {
+  border-color: rgba(37, 211, 102, 0.6);
+  background: rgba(37, 211, 102, 0.1);
+  color: #25D366;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.12);
+}
+
+/* ── LinkedIn — blue ── */
+.contact-btn--linkedin:hover {
+  border-color: rgba(0, 119, 181, 0.6);
+  background: rgba(0, 119, 181, 0.1);
+  color: #0A66C2;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 119, 181, 0.12);
+}
+
+/* ── GitHub — white ── */
+.contact-btn--github:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255, 255, 255, 0.06);
+}
+
+/* ── Instagram — pink/rose ── */
+.contact-btn--instagram:hover {
+  border-color: rgba(225, 48, 108, 0.6);
+  background: rgba(225, 48, 108, 0.1);
+  color: #E1306C;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(225, 48, 108, 0.12);
+}
+
+/* ── Footer ── */
+.contact-footer {
+  position: relative;
+  width: 100%;
+  padding: 32px 24px 28px;
+  z-index: 1;
+}
+
+.contact-footer__gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.015) 40%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-footer__text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .contact-container {
+    padding: 72px 20px 32px;
+  }
+
+  .contact-title {
+    font-size: 1.75rem;
+  }
+
+  .contact-description {
+    font-size: 0.88rem;
+    margin-bottom: 36px;
+  }
+
+  .contact-buttons {
+    gap: 10px;
+  }
+
+  .contact-btn {
+    padding: 12px 22px;
+    font-size: 0.85rem;
+  }
+}
