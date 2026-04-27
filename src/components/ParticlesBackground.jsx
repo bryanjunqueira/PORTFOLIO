@@ -4,6 +4,7 @@ import { loadSlim } from "@tsparticles/slim";
 
 export default function ParticlesBackground() {
   const [init, setInit] = useState(false);
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -11,7 +12,23 @@ export default function ParticlesBackground() {
     }).then(() => {
       setInit(true);
     });
+
+    // Detect theme changes
+    const observer = new MutationObserver(() => {
+      const isLight = document.documentElement.classList.contains("light-theme");
+      setTheme(isLight ? "light" : "dark");
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+    // Initial check
+    if (document.documentElement.classList.contains("light-theme")) {
+      setTheme("light");
+    }
+
+    return () => observer.disconnect();
   }, []);
+
+  const particleColor = theme === "light" ? "#000000" : "#ffffff";
 
   const options = {
     background: {
@@ -26,16 +43,16 @@ export default function ParticlesBackground() {
       },
     },
     particles: {
-      color: { value: "#ffffff" },
+      color: { value: particleColor },
       links: {
-        enable: true, // Sistema panorâmico conectado
-        color: "#ffffff",
+        enable: true,
+        color: particleColor,
         distance: 150,
-        opacity: 0.1,
+        opacity: theme === "light" ? 0.15 : 0.1,
         width: 1,
       },
       move: {
-        direction: "none", // Movimento em todas as direções (panorâmico)
+        direction: "none",
         enable: true,
         outModes: { default: "bounce" },
         random: true,
@@ -44,10 +61,10 @@ export default function ParticlesBackground() {
       },
       number: {
         density: { enable: true, area: 1000 },
-        value: 100, // Mais partículas rodando
+        value: 100,
       },
       opacity: {
-        value: { min: 0.1, max: 0.3 },
+        value: theme === "light" ? { min: 0.15, max: 0.4 } : { min: 0.1, max: 0.3 },
       },
       shape: { type: "circle" },
       size: { value: { min: 1, max: 3 } },
@@ -59,6 +76,7 @@ export default function ParticlesBackground() {
 
   return (
     <Particles
+      key={theme}
       id="tsparticles"
       options={options}
       className="fixed inset-0 -z-10"

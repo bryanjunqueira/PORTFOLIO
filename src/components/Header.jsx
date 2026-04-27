@@ -6,9 +6,9 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'Sobre', href: '#sobre' },
+  { name: 'Skills', href: '#tecnologias' },
   { name: 'Projetos', href: '#projetos' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Experiência', href: '#experiencia' },
+  { name: 'Experiência', href: '#trajetoria' },
   { name: 'Contato', href: '#contato' },
 ];
 
@@ -57,6 +57,10 @@ export default function Header() {
   const handleClick = (e, href) => {
     e.preventDefault();
     setMobileOpen(false);
+    if (href === '#home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
