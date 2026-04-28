@@ -1077,7 +1077,7 @@ html.light-theme .about-card__expanded-text {
   }
 
   .tech-marquee-fade {
-    width: 40px;
+    display: none;
   }
 
   .tech-marquee-track {
