@@ -24,11 +24,12 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
+  background-color: var(--color-dark);
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-dark);
+  background-color: transparent;
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -266,7 +267,6 @@ body.modal-open .header {
 /* ===== Light Theme ===== */
 html.light-theme {
   filter: invert(1) hue-rotate(180deg);
-  background-color: #f5f5f5;
 }
 
 /* Prevent inverting images, videos, and particles */
@@ -280,18 +280,18 @@ html.light-theme .light-invert-ignore {
 /* ── Light Theme: Stronger borders & contrasts ── */
 html.light-theme .card-glass,
 html.light-theme .about-card {
-  border-color: rgba(0, 0, 0, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
 }
 
 html.light-theme .about-card:hover {
-  border-color: rgba(0, 0, 0, 0.35) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
 }
 
 html.light-theme .about-divider {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.18) 50%,
+    rgba(255, 255, 255, 0.35) 50%,
     transparent 100%
   ) !important;
 }
@@ -300,36 +300,36 @@ html.light-theme .about-card__bar {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 0, 0, 0.3),
+    rgba(255, 255, 255, 0.5),
     transparent
   ) !important;
 }
 
 html.light-theme .about-card__icon-wrapper {
-  border-color: rgba(0, 0, 0, 0.12) !important;
-  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 html.light-theme .about-card__arrow {
-  border-color: rgba(0, 0, 0, 0.12) !important;
-  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Header in light mode */
 html.light-theme .header {
-  border-color: rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 html.light-theme .header--sticky-visible {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.15) !important;
 }
 
 html.light-theme .header-logo {
-  border-color: rgba(0, 0, 0, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 html.light-theme .header-logo:hover {
-  border-color: rgba(0, 0, 0, 0.35) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
 }
 
 /* Tech Marquee in light mode */
@@ -338,76 +338,76 @@ html.light-theme .tech-marquee-fade--right {
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.1) 20%,
-    rgba(0, 0, 0, 0.3) 50%,
-    rgba(0, 0, 0, 0.1) 80%,
+    rgba(10, 10, 10, 0.1) 20%,
+    rgba(10, 10, 10, 0.3) 50%,
+    rgba(10, 10, 10, 0.1) 80%,
     transparent 100%
   ) !important;
 }
 
 html.light-theme .tech-marquee-item__icon-wrap {
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 html.light-theme .tech-marquee-item:hover .tech-marquee-item__icon-wrap {
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  background: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
 }
 
 /* Project cards in light mode */
 html.light-theme .proj-card-grid {
-  border-color: rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
 }
 
 html.light-theme .proj-card-grid:hover {
-  border-color: rgba(0, 0, 0, 0.3) !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.15) !important;
 }
 
 html.light-theme .proj-card-grid__badge {
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 html.light-theme .proj-card-grid__tech-icon {
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 html.light-theme .proj-card-grid__tech-more {
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Experience / Trajectory in light mode */
 html.light-theme .traj-card {
-  border-color: rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
 }
 
 html.light-theme .traj-card:hover {
-  border-color: rgba(0, 0, 0, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
 }
 
 html.light-theme .traj-card__period {
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Content panel border in light mode */
 html.light-theme .content-panel {
-  border-color: rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
   box-shadow:
-    0 -8px 30px rgba(0, 0, 0, 0.04),
-    0 -2px 10px rgba(0, 0, 0, 0.02) !important;
+    0 -8px 30px rgba(255, 255, 255, 0.15),
+    0 -2px 10px rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Contact section in light mode */
 html.light-theme .contact-btn {
-  border-color: rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
 }
 
 html.light-theme .contact-icon-ring {
-  border-color: rgba(0, 0, 0, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Scrollbar in light mode */
@@ -425,20 +425,20 @@ html.light-theme ::-webkit-scrollbar-thumb:hover {
 
 /* Modal in light mode */
 html.light-theme .modal-container {
-  border-color: rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
 }
 
 html.light-theme .modal-divider {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 0, 0, 0.12),
+    rgba(255, 255, 255, 0.3),
     transparent
   ) !important;
 }
 
 html.light-theme .modal-v2-tech-chip {
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* ── Light Theme: Hero with black animations ── */
@@ -448,33 +448,33 @@ html.light-theme .hero-section {
 
 /* Ensure the hero buttons have strong borders in light mode */
 html.light-theme .hero-btn--secondary {
-  border-color: rgba(0, 0, 0, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 html.light-theme .hero-btn--secondary:hover {
-  border-color: rgba(0, 0, 0, 0.5) !important;
-  background: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
 }
 
 /* Skills section borders in light mode */
 html.light-theme .flex.flex-col.items-center.justify-center.p-6.border {
-  border-color: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
 }
 
 html.light-theme .flex.flex-col.items-center.justify-center.p-6.border:hover {
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* About section icon ring */
 html.light-theme .about-section-icon {
-  border-color: rgba(0, 0, 0, 0.12) !important;
-  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Expanded text border in light mode */
 html.light-theme .about-card__expanded-text {
-  border-color: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* ===== Hero Section ===== */
@@ -2197,6 +2197,24 @@ html.light-theme .about-card__expanded-text {
   );
   pointer-events: none;
   z-index: 0;
+/* Light theme strong shadow separator */
+html.light-theme .contact-glow {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.1) 40%,
+    transparent 100%
+  ) !important;
+  width: 100%;
+  height: 280px;
+  top: 0;
+  left: 0;
+  transform: none;
+}
+
+html.light-theme .contact-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: none;
 }
 
 .contact-container {

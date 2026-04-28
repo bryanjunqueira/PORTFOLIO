@@ -48,7 +48,7 @@ export default function ParticlesBackground() {
         enable: true,
         color: particleColor,
         distance: 150,
-        opacity: theme === "light" ? 0.15 : 0.1,
+        opacity: theme === "light" ? 0.4 : 0.1,
         width: 1,
       },
       move: {
@@ -61,10 +61,10 @@ export default function ParticlesBackground() {
       },
       number: {
         density: { enable: true, area: 1000 },
-        value: 100,
+        value: 160,
       },
       opacity: {
-        value: theme === "light" ? { min: 0.15, max: 0.4 } : { min: 0.1, max: 0.3 },
+        value: theme === "light" ? { min: 0.4, max: 0.8 } : { min: 0.1, max: 0.3 },
       },
       shape: { type: "circle" },
       size: { value: { min: 1, max: 3 } },
