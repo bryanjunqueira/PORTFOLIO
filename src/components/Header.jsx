@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { FiSun, FiMoon, FiHome, FiUser, FiCode, FiFolder, FiBriefcase, FiMail } from 'react-icons/fi';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'Sobre', href: '#sobre' },
-  { name: 'Skills', href: '#tecnologias' },
-  { name: 'Projetos', href: '#projetos' },
-  { name: 'Experiência', href: '#trajetoria' },
-  { name: 'Contato', href: '#contato' },
+  { name: 'Home', href: '#home', icon: FiHome },
+  { name: 'Sobre', href: '#sobre', icon: FiUser },
+  { name: 'Skills', href: '#tecnologias', icon: FiCode },
+  { name: 'Projetos', href: '#projetos', icon: FiFolder },
+  { name: 'Experiência', href: '#trajetoria', icon: FiBriefcase },
+  { name: 'Contato', href: '#contato', icon: FiMail },
 ];
 
 export default function Header() {
@@ -137,32 +137,47 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Backdrop */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-0 z-[200] bg-[#0a0a0a] pt-28 px-8 md:hidden light-invert-ignore"
-          >
-            <nav className="flex flex-col gap-6">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleClick(e, link.href)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="text-xl font-medium text-text-muted hover:text-white transition-colors"
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-            </nav>
-          </motion.div>
+          <>
+            {/* Backdrop escurecido */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[150] bg-black/60 backdrop-blur-sm md:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+
+            {/* Menu Card Flutuante */}
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -15, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed top-[100px] left-6 right-6 z-[200] bg-[#111111] border border-white/10 rounded-3xl p-6 shadow-2xl md:hidden flex flex-col gap-2"
+            >
+              {navLinks.map((link, i) => {
+                const Icon = link.icon;
+                return (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleClick(e, link.href)}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 + i * 0.05 }}
+                    className="flex items-center justify-center gap-3 text-base font-medium text-white/60 hover:text-white transition-colors py-3 w-full rounded-xl hover:bg-white/5"
+                  >
+                    <Icon size={18} className="opacity-80" />
+                    <span>{link.name}</span>
+                  </motion.a>
+                );
+              })}
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
