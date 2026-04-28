@@ -90,7 +90,7 @@ export default function Contact() {
       <footer className="contact-footer">
         <div className="contact-footer__gradient" />
         <p className="contact-footer__text">
-          © 2025 Bryan Junqueira. Todos os direitos reservados.
+          © 2026 Bryan Junqueira. Todos os direitos reservados.
         </p>
       </footer>
     </section>

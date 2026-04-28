@@ -147,35 +147,37 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[150] bg-black/60 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-[150] bg-black/70 backdrop-blur-sm md:hidden"
               onClick={() => setMobileOpen(false)}
             />
 
-            {/* Menu Card Flutuante */}
+            {/* Menu Card Flutuante Minimalista */}
             <motion.div
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -15, scale: 0.95 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-[100px] left-6 right-6 z-[200] bg-[#111111] border border-white/10 rounded-3xl p-6 shadow-2xl md:hidden flex flex-col gap-2"
+              className="fixed top-[100px] left-1/2 -translate-x-1/2 w-[85%] max-w-[320px] min-h-[420px] z-[200] bg-[#0d0d0d] border border-white/5 rounded-[2.5rem] p-12 shadow-2xl md:hidden flex flex-col items-center justify-center"
             >
-              {navLinks.map((link, i) => {
-                const Icon = link.icon;
-                return (
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleClick(e, link.href)}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 + i * 0.05 }}
-                    className="flex items-center justify-center gap-3 text-base font-medium text-white/60 hover:text-white transition-colors py-3 w-full rounded-xl hover:bg-white/5"
-                  >
-                    <Icon size={18} className="opacity-80" />
-                    <span>{link.name}</span>
-                  </motion.a>
-                );
-              })}
+              <div className="flex flex-col items-start gap-8">
+                {navLinks.map((link, i) => {
+                  const Icon = link.icon;
+                  return (
+                    <motion.a
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => handleClick(e, link.href)}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.05 + i * 0.05 }}
+                      className="flex items-center gap-5 text-[0.95rem] font-light text-white/50 hover:text-white transition-colors tracking-widest"
+                    >
+                      <Icon size={18} className="opacity-50" />
+                      <span>{link.name}</span>
+                    </motion.a>
+                  );
+                })}
+              </div>
             </motion.div>
           </>
         )}
