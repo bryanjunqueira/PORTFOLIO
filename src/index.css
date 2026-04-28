@@ -2197,6 +2197,8 @@ html.light-theme .about-card__expanded-text {
   );
   pointer-events: none;
   z-index: 0;
+}
+
 /* Light theme strong shadow separator */
 html.light-theme .contact-glow {
   background: linear-gradient(
